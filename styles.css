@@ -1,0 +1,626 @@
+/* ========================================
+   BREATHING COSMOS - COSMIC ETHEREAL DESIGN
+   ======================================== */
+
+/* CSS Variables - Cosmic Palette */
+:root {
+    /* Deep Space Colors */
+    --void-black: #000000;
+    --space-dark: #0a0e1a;
+    --space-deep: #0d1526;
+    --nebula-purple-dark: #1a1f3a;
+    --nebula-purple: #2d1b69;
+    --nebula-bright: #5a189a;
+    --nebula-vivid: #9d4edd;
+
+    /* Accent Colors */
+    --cyan-glow: #00d4ff;
+    --gold-accent: #ffd700;
+    --silver-mist: #c0c0d0;
+
+    /* UI Colors */
+    --ui-bg: rgba(10, 14, 26, 0.85);
+    --ui-border: rgba(157, 78, 221, 0.2);
+    --ui-hover: rgba(157, 78, 221, 0.3);
+
+    /* Typography */
+    --font-display: 'Cormorant Garamond', serif;
+    --font-ui: 'Work Sans', sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2.5rem;
+    --space-xl: 4rem;
+
+    /* Animation */
+    --ease-cosmic: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-breath: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-ui);
+    background: var(--void-black);
+    color: var(--silver-mist);
+    cursor: default;
+}
+
+/* Custom cursor for cosmic feel */
+body {
+    cursor: crosshair;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ========================================
+   CANVAS
+   ======================================== */
+
+#cosmos-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: radial-gradient(ellipse at center, var(--space-deep) 0%, var(--void-black) 100%);
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+.cosmic-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--silver-mist) 0%, var(--cyan-glow) 50%, var(--nebula-vivid) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-sm);
+    animation: titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(157, 78, 221, 0.3)); }
+    50% { filter: brightness(1.2) drop-shadow(0 0 40px rgba(0, 212, 255, 0.5)); }
+}
+
+.cosmic-subtitle {
+    font-family: var(--font-ui);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver-mist);
+    opacity: 0.8;
+    margin-bottom: var(--space-xl);
+}
+
+/* ========================================
+   OVERLAYS
+   ======================================== */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s var(--ease-cosmic);
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.welcome-content,
+.pause-content {
+    text-align: center;
+    max-width: 600px;
+    padding: var(--space-lg);
+    animation: floatIn 1s var(--ease-cosmic);
+}
+
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   BREATHING PREVIEW CIRCLE
+   ======================================== */
+
+.breathing-preview {
+    margin: var(--space-xl) 0;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breath-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--nebula-bright) 0%, transparent 70%);
+    border: 2px solid var(--cyan-glow);
+    box-shadow:
+        0 0 40px rgba(0, 212, 255, 0.4),
+        inset 0 0 40px rgba(157, 78, 221, 0.3);
+    animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.instruction-text {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--silver-mist);
+    opacity: 0.9;
+    margin-bottom: var(--space-lg);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.cosmic-button {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: var(--space-sm) var(--space-lg);
+    margin: var(--space-xs);
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--silver-mist);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s var(--ease-cosmic);
+}
+
+.cosmic-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--nebula-bright), var(--cyan-glow));
+    opacity: 0;
+    transition: opacity 0.3s var(--ease-cosmic);
+    z-index: -1;
+}
+
+.cosmic-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--cyan-glow);
+    transition: all 0.3s var(--ease-cosmic);
+}
+
+.cosmic-button:hover::before {
+    opacity: 0.2;
+}
+
+.cosmic-button:hover::after {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+.cosmic-button:active {
+    transform: scale(0.98);
+}
+
+.cosmic-button.primary {
+    background: linear-gradient(135deg, var(--nebula-bright), var(--nebula-vivid));
+    color: white;
+}
+
+.cosmic-button.primary::after {
+    border-color: var(--nebula-vivid);
+}
+
+.cosmic-button.secondary::after {
+    border-color: var(--cyan-glow);
+}
+
+.cosmic-button.tertiary::after {
+    border-color: var(--silver-mist);
+    opacity: 0.5;
+}
+
+.welcome-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.privacy-note {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--silver-mist);
+    opacity: 0.5;
+    margin-top: var(--space-md);
+}
+
+/* ========================================
+   MAIN UI
+   ======================================== */
+
+.main-ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.4s var(--ease-cosmic);
+}
+
+.main-ui.hidden {
+    opacity: 0;
+}
+
+.main-ui > * {
+    pointer-events: all;
+}
+
+/* Top Bar */
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, var(--ui-bg) 0%, transparent 100%);
+    backdrop-filter: blur(10px);
+}
+
+.breath-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.breath-circle-small {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--nebula-bright) 0%, transparent 70%);
+    border: 1px solid var(--cyan-glow);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    animation: breatheSmall 4s ease-in-out infinite;
+}
+
+@keyframes breatheSmall {
+    0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.breath-phase-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--silver-mist);
+}
+
+.session-info {
+    display: flex;
+    gap: var(--space-md);
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--silver-mist);
+    opacity: 0.8;
+}
+
+/* Bottom Bar */
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to top, var(--ui-bg) 0%, transparent 100%);
+    backdrop-filter: blur(10px);
+}
+
+.controls-group {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--ui-border);
+    border-radius: 0;
+    background: transparent;
+    color: var(--silver-mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-cosmic);
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cyan-glow);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease-cosmic);
+}
+
+.icon-button:hover {
+    border-color: var(--cyan-glow);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.icon-button:hover::before {
+    opacity: 0.1;
+}
+
+.icon-button svg {
+    position: relative;
+    z-index: 1;
+}
+
+/* Mode Selector */
+.mode-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.mode-label {
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--silver-mist);
+    opacity: 0.7;
+}
+
+.mode-options {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.mode-button {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--ui-border);
+    background: transparent;
+    color: var(--silver-mist);
+    transition: all 0.3s var(--ease-cosmic);
+}
+
+.mode-button.active {
+    border-color: var(--cyan-glow);
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.mode-button:hover:not(.active) {
+    border-color: var(--nebula-vivid);
+    background: rgba(157, 78, 221, 0.1);
+}
+
+/* ========================================
+   PAUSE OVERLAY
+   ======================================== */
+
+.pause-content h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--silver-mist);
+    margin-bottom: var(--space-md);
+}
+
+.session-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--silver-mist);
+}
+
+.summary-item strong {
+    color: var(--cyan-glow);
+    font-weight: 400;
+}
+
+.pause-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+}
+
+/* ========================================
+   LOADING
+   ======================================== */
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--void-black);
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.6s var(--ease-cosmic);
+}
+
+.loading.hidden {
+    opacity: 0;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid transparent;
+    border-top-color: var(--cyan-glow);
+    border-right-color: var(--nebula-vivid);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+    margin-bottom: var(--space-md);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver-mist);
+    opacity: 0.7;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .cosmic-title {
+        font-size: 3rem;
+    }
+
+    .cosmic-subtitle {
+        font-size: 1rem;
+    }
+
+    .bottom-bar {
+        flex-direction: column;
+        gap: var(--space-sm);
+        align-items: stretch;
+    }
+
+    .controls-group {
+        justify-content: center;
+    }
+
+    .mode-selector {
+        justify-content: center;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+    }
+
+    .cosmic-button {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus states */
+button:focus-visible,
+.icon-button:focus-visible,
+.mode-button:focus-visible {
+    outline: 2px solid var(--cyan-glow);
+    outline-offset: 2px;
+}

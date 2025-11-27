@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Cosmos - Meditative Art</title>
+    <meta name="description" content="Transform your breathing into cosmic art. A meditative generative experience.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Canvas -->
+    <canvas id="cosmos-canvas"></canvas>
+
+    <!-- Welcome Overlay -->
+    <div id="welcome-overlay" class="overlay active">
+        <div class="welcome-content">
+            <h1 class="cosmic-title">Breathing Cosmos</h1>
+            <p class="cosmic-subtitle">Transform your breath into living art</p>
+
+            <div class="breathing-preview">
+                <div class="breath-circle"></div>
+            </div>
+
+            <p class="instruction-text">
+                Inhale &rarr; cosmos expands<br>
+                Exhale &rarr; patterns crystallize
+            </p>
+
+            <div class="welcome-buttons">
+                <button id="start-manual" class="cosmic-button primary">
+                    Begin Journey
+                </button>
+                <button id="start-mic" class="cosmic-button secondary">
+                    Use Microphone
+                </button>
+            </div>
+
+            <p class="privacy-note">
+                Microphone only detects breathing patterns. No recording.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main UI Controls (Hidden by default) -->
+    <div id="main-ui" class="main-ui">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="breath-indicator">
+                <div class="breath-circle-small"></div>
+                <span class="breath-phase-text">Breathe naturally</span>
+            </div>
+
+            <div class="session-info">
+                <span class="session-timer">0:00</span>
+                <span class="breath-count">0 breaths</span>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="bottom-bar">
+            <div class="controls-group">
+                <button class="icon-button" id="toggle-ui" title="Hide UI (H)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+
+                <button class="icon-button" id="toggle-audio" title="Mute (M)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
+
+                <button class="icon-button" id="save-screenshot" title="Save Screenshot (S)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </button>
+
+                <button class="icon-button" id="reset-session" title="Reset (R)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mode-selector">
+                <span class="mode-label">Visual Mode</span>
+                <div class="mode-options">
+                    <button class="mode-button active" data-mode="nebula">Nebula</button>
+                    <!-- More modes in Phase 2 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="pause-overlay" class="overlay">
+        <div class="pause-content">
+            <h2>Session Paused</h2>
+            <p class="session-summary">
+                <span class="summary-item">Duration: <strong id="pause-duration">0:00</strong></span>
+                <span class="summary-item">Breaths: <strong id="pause-breaths">0</strong></span>
+            </p>
+
+            <div class="pause-buttons">
+                <button id="resume-session" class="cosmic-button primary">
+                    Continue
+                </button>
+                <button id="save-and-exit" class="cosmic-button secondary">
+                    Save & Share
+                </button>
+                <button id="new-session" class="cosmic-button tertiary">
+                    Start New
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Preparing cosmos...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="src/utils.js"></script>
+    <script type="module" src="src/breathing.js"></script>
+    <script type="module" src="src/visuals/nebula.js"></script>
+    <script type="module" src="src/visuals/renderer.js"></script>
+    <script type="module" src="src/audio/synth.js"></script>
+    <script type="module" src="src/audio/engine.js"></script>
+    <script type="module" src="src/ui.js"></script>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
